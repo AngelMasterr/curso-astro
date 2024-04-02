@@ -1,4 +1,6 @@
 ---
+import { type APISpaceXResponse } from './types/api'
+
 const res = await fetch('https://api.spacexdata.com/v5/launches/query', {
 	method: 'POST',
 	headers: {
@@ -14,14 +16,25 @@ const res = await fetch('https://api.spacexdata.com/v5/launches/query', {
 		},
 	}),
 })
+// crear la var 'data' donde vamos a extrar el archvio json
+// const data = JSON.stringfy(await res.json())
+// console.log(data) --> de aca se extrae el json como string y luego lo pasamos a TypeScript con "app.quicktype.io"
+// creamos un archivo api.ts en la carpeta 'components' para guardar el typescript
 
-const data = JSON.stringify(await res.json())
+const { docs: launches } = (await res.json()) as APISpaceXResponse
 
-console.log(data)
+console.log(launches)
 
 // realiza una solicitud a la api de xpacex
 ---
 
 <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-	<article></article>
+	{
+		launches.map((launch) => (
+			<article>
+				<img src={launch.links.patch.small} alt="" />
+				<h2>Launch #{launch.id}</h2>
+			</article>
+		))
+	}
 </div>
