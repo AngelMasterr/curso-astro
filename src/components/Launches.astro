@@ -28,11 +28,11 @@ console.log(launches)
 // realiza una solicitud a la api de xpacex
 ---
 
-<div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+<div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 mx-auto">
 	{
 		launches.map((launch) => (
-			<article>
-				<img src={launch.links.patch.small} alt="" />
+			<article class="flex flex-col items-center">
+				<img src={launch.links.patch.small} alt="" class="mx-auto" />
 				<h2>Launch #{launch.id}</h2>
 			</article>
 		))
