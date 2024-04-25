@@ -25,10 +25,7 @@ export const getLatestLaunches = async () => {
 			},
 		}),
 	})
-	// crear la var 'data' donde vamos a extrar el archvio json
-	// const data = JSON.stringfy(await res.json())
-	// console.log(data) --> de aca se extrae el json como string y luego lo pasamos a TypeScript con "app.quicktype.io"
-	// creamos un archivo api.ts en la carpeta 'components' para guardar el typescript
+
 	const { docs: launches } = (await res.json()) as APISpaceXResponse
 
 	console.log(launches)
