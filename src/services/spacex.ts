@@ -19,13 +19,12 @@ export const getLatestLaunches = async () => {
 			query: {},
 			options: {
 				sort: {
-					date_unix: 'asc',
+					date_unix: 'desc',
 				},
 				limit: 12,
 			},
 		}),
 	})
-
 	const { docs: launches } = (await res.json()) as APISpaceXResponse
 
 	console.log(launches)
