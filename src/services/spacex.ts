@@ -30,3 +30,36 @@ export const getLatestLaunches = async () => {
 	console.log(launches)
 	return launches
 }
+
+export const getAllLaunches = async () => {
+	let allLaunches: any[] = []
+	let currentPage = 1
+	let totalPages = 11 // Este valor puede variar dependiendo de la respuesta de la API
+
+	while (currentPage <= totalPages) {
+		const res = await fetch('https://api.spacexdata.com/v5/launches/query', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				query: {},
+				options: {
+					sort: {
+						date_unix: 'desc',
+					},
+					limit: 12,
+					page: currentPage, // Solicitar la página actual
+				},
+			}),
+		})
+
+		const { docs: launches, totalPages: total } = await res.json()
+		allLaunches = [...allLaunches, ...launches]
+		totalPages = total // Actualizar el total de páginas en caso de que haya cambiado
+		currentPage++
+	}
+
+	console.log(allLaunches)
+	return allLaunches
+}
