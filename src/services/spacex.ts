@@ -1,4 +1,5 @@
 import { type Doc, type APISpaceXResponse } from '../types/api'
+import { type APISpacexCrew } from '../types/apiCrew'
 
 export const getLaunchtBy = async ({ id }: { id: string }) => {
 	const res = await fetch(`https://api.spacexdata.com/v5/launches/${id}`)
@@ -22,6 +23,7 @@ export const getLatestLaunches = async () => {
 					date_unix: 'asc',
 				},
 				limit: 12,
+				page: 1,
 			},
 		}),
 	})
@@ -31,34 +33,25 @@ export const getLatestLaunches = async () => {
 	return launches
 }
 
-export const getAllLaunches = async () => {
-	let allLaunches: any[] = []
-	let currentPage = 1
-	let totalPages = 2 // Este valor puede variar dependiendo de la respuesta de la API
-
-	while (currentPage <= totalPages) {
-		const res = await fetch('https://api.spacexdata.com/v5/launches/query', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				query: {},
-				options: {
-					sort: {
-						date_unix: 'asc',
-					},
-					limit: 6,
-					page: currentPage, // Solicitar la página actual
+export const getCrew = async () => {
+	const res = await fetch('https://api.spacexdata.com/v4/crew/query', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({
+			query: {},
+			options: {
+				sort: {
+					date_unix: 'asc',
 				},
-			}),
-		})
+				limit: 12,
+				page: 1,
+			},
+		}),
+	})
+	const { docs: crews } = (await res.json()) as APISpacexCrew
 
-		const { docs: launches } = (await res.json()) as APISpaceXResponse
-		allLaunches = [...allLaunches, ...launches]
-		currentPage++
-	}
-
-	console.log(allLaunches)
-	return allLaunches
+	console.log(crews)
+	return crews
 }
