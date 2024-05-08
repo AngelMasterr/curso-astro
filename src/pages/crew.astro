@@ -3,7 +3,7 @@ import CardCrew from '../components/CardCrew.astro'
 import Layout from '../layouts/Layout.astro'
 import { getCrew } from '../services/spacex'
 
-const crews = await getCrew()
+const crews = await getCrew(1)
 ---
 
 <Layout title="Tripulación">

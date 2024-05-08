@@ -33,7 +33,7 @@ export const getLatestLaunches = async () => {
 	return launches
 }
 
-export const getCrew = async () => {
+export const getCrew = async (page = 1) => {
 	const res = await fetch('https://api.spacexdata.com/v4/crew/query', {
 		method: 'POST',
 		headers: {
@@ -45,8 +45,8 @@ export const getCrew = async () => {
 				sort: {
 					date_unix: 'asc',
 				},
-				limit: 12,
-				page: 1,
+				limit: 9,
+				page: page,
 			},
 		}),
 	})
