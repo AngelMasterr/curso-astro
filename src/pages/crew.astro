@@ -1,5 +1,6 @@
 ---
 import CardCrew from '../components/CardCrew.astro'
+import NextPrev from '../components/Next-Prev.astro'
 import Layout from '../layouts/Layout.astro'
 import { getCrew } from '../services/spacex'
 
@@ -20,5 +21,10 @@ const crews = await getCrew(1)
 				/>
 			))
 		}
+	</div>
+	<div class="flex justify-center mx-auto pt-6 pb-24">
+		<div class="mt-8">
+			<NextPrev />
+		</div>
 	</div>
 </Layout>
