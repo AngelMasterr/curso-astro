@@ -12,16 +12,16 @@ const { id, name, agency, img, wikipedia, status } = Astro.props
 
 <a
 	href={`/crew/${id}`}
-	class="rounded-lg border shadow-md bg-gray-800 border-gray-700 hover:scale-105 hover:bg-gray-700 hover:border-gray-500 transition flex flex-col">
+	class="rounded-lg border-2 shadow-md bg-gray-800 border-gray-700 hover:scale-105 hover:bg-gray-700 hover:border-gray-500 transition flex flex-col">
 	<picture class="flex justify-center p-4">
-		<img class="rounded-lg" src={img} alt="{'patch for launch ${id}'}" />
+		<img class="object-cover rounded-lg h-full" src={img} alt={`patch for launch ${id}`} />
 	</picture>
-	<header class="p-4 flex-grow">
-		<h2 class="my-2 text-2xl font-bold tracking-tight text-white">
-			Name: {name}
-		</h2>
+	<header class="p-4 flex-grow flex flex-col-reverse items-end">
 		<p class="mb-4 font-light text-gray-400">
 			Agency: {agency}
 		</p>
+		<h2 class="my-2 text-2xl font-bold tracking-tight text-white">
+			Name: {name}
+		</h2>
 	</header>
 </a>
